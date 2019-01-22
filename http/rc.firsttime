@@ -1,0 +1,9 @@
+# Download Key
+curl --retry 10 --retry-delay 5 --retry-connrefused http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key -o /home/openbsd/.ssh/authorized_keys
+chmod 0600 /home/openbsd/.ssh/authorized_keys
+
+# Download Hostname
+curl --retry 10 --retry-delay 5 --retry-connrefused fetch -a http://169.254.169.254/latest/meta-data/hostname -o /etc/myname
+
+# Set Hostname Immediately
+hostname $(cat /etc/myname)

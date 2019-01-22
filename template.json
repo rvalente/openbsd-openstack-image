@@ -1,0 +1,63 @@
+{
+    "variables": {
+	"cpus": "1",
+	"mem": "1024",
+	"disk": "8192",
+	"ssh_user": "root",
+	"ssh_pass": "bsd-caveman-success"
+    },
+    "builders": [
+	{
+	    "boot_wait": "20s",
+	    "type": "virtualbox-iso",
+	    "guest_os_type": "OpenBSD_64",
+	    "guest_additions_mode": "disable",
+	    "iso_url": "https://cdn.openbsd.org/pub/OpenBSD/6.4/amd64/install64.iso",
+	    "iso_checksum_url": "http://cdn.openbsd.org/pub/OpenBSD/6.4/amd64/SHA256",
+	    "iso_checksum_type": "sha256",
+	    "ssh_username": "{{user `ssh_user`}}",
+	    "ssh_password": "{{user `ssh_pass`}}",
+	    "ssh_wait_timeout": "10000s",
+	    "shutdown_command": "/sbin/halt -p",
+	    "http_directory": "http",
+	    "http_port_min": "8954",
+	    "http_port_max": "8954",
+	    "boot_command": [
+		"A<enter><wait5>",
+		"http://{{.HTTPIP}}:{{.HTTPPort}}/install.conf<enter>"
+	    ],
+	    "vboxmanage": [
+		[
+		    "modifyvm",
+		    "{{.Name}}",
+		    "--memory",
+		    "1024"
+		],
+		[
+		    "modifyvm",
+		    "{{.Name}}",
+		    "--cpus",
+		    "1"
+		]
+	    ]
+	}
+    ],
+    "provisioners": [
+	{
+	    "type": "shell",
+	    "inline": ["syspatch", "syspatch", "reboot"],
+	    "expect_disconnect": true
+	},
+	{
+	    "type": "file",
+	    "source": "http/rc.firsttime",
+	    "destination": "/etc/rc.firsttime"
+	},
+	{
+	    "type": "shell",
+            "scripts": [
+                "scripts/bootstrap.sh"
+	    ]
+	}
+    ]
+}
