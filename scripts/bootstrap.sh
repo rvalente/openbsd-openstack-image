@@ -1,4 +1,6 @@
-set -x
+#set -x
+
+syspatch
 
 # ensure we have curl for rc.firsttime
 pkg_add curl

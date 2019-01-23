@@ -45,19 +45,15 @@
     "provisioners": [
 	{
 	    "type": "shell",
-	    "inline": ["syspatch", "syspatch", "reboot"],
-	    "expect_disconnect": true
+            "scripts": [
+                "scripts/bootstrap.sh"
+	    ]
 	},
 	{
 	    "type": "file",
 	    "source": "http/rc.firsttime",
 	    "destination": "/etc/rc.firsttime"
-	},
-	{
-	    "type": "shell",
-            "scripts": [
-                "scripts/bootstrap.sh"
-	    ]
 	}
+
     ]
 }
