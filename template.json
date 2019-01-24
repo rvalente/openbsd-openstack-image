@@ -22,6 +22,7 @@
 	    "http_directory": "http",
 	    "http_port_min": "8954",
 	    "http_port_max": "8954",
+	    "disk_size": "{{user `disk`}}",
 	    "boot_command": [
 		"A<enter><wait5>",
 		"http://{{.HTTPIP}}:{{.HTTPPort}}/install.conf<enter>"
