@@ -9,3 +9,4 @@ output-virtualbox-iso/
 
 # raw images
 *.raw
+*.bz2
