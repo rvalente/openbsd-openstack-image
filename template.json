@@ -61,7 +61,11 @@
     "post-processors": [
 	{
 	    "type": "shell-local",
-	    "inline": ["rm ./openbsd-64.raw", "qemu-img convert -f vmdk -O raw output-virtualbox-iso/openbsd-64-disk001.vmdk ./openbsd-64.raw"]
+	    "inline": ["[[ -f openbsd-64.raw ]] && rm ./openbsd-64.raw"]
+	},
+	{
+	    "type": "shell-local",
+	    "inline": ["qemu-img convert -f vmdk -O raw output-virtualbox-iso/openbsd-64-disk001.vmdk ./openbsd-64.raw"]
 	},
 	{
 	    "type": "shell-local",

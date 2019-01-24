@@ -6,3 +6,6 @@ packer_cache/
 
 # output
 output-virtualbox-iso/
+
+# raw images
+*.raw
