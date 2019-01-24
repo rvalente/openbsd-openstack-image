@@ -9,6 +9,7 @@
     "builders": [
 	{
 	    "boot_wait": "20s",
+	    "vm_name": "openbsd-64",
 	    "type": "virtualbox-iso",
 	    "guest_os_type": "OpenBSD_64",
 	    "guest_additions_mode": "disable",
@@ -56,5 +57,15 @@
 	    "destination": "/etc/rc.firsttime"
 	}
 
+    ],
+    "post-processors": [
+	{
+	    "type": "shell-local",
+	    "inline": ["rm ./openbsd-64.raw", "qemu-img convert -f vmdk -O raw output-virtualbox-iso/openbsd-64-disk001.vmdk ./openbsd-64.raw"]
+	},
+	{
+	    "type": "shell-local",
+	    "inline": ["bzip2 openbsd-64.raw"]
+	}
     ]
 }
