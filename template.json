@@ -66,10 +66,6 @@
 	{
 	    "type": "shell-local",
 	    "inline": ["qemu-img convert -f vmdk -O raw output-virtualbox-iso/openbsd-64-disk001.vmdk ./openbsd-64.raw"]
-	},
-	{
-	    "type": "shell-local",
-	    "inline": ["bzip2 openbsd-64.raw"]
 	}
     ]
 }

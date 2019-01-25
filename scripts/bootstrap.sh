@@ -1,5 +1,11 @@
 #set -x
 
+# sleep to ensure relink_kernel is done and run syspatch
+sleep 5
+syspatch
+
+# run syspatch again
+sleep 5
 syspatch
 
 # ensure we have curl for rc.firsttime
